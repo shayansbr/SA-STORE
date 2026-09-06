@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    (function () {
+      var saved = localStorage.getItem('sa-store-theme');
+      var theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <title>Dashboard — SA Store</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="wrap">
+      <a href="index.html" class="nav-brand">
+        <span class="logo-mark">SA</span>
+        SA Store
+      </a>
+      <div class="nav-links">
+        <a href="devices.html">Browse devices</a>
+        <a href="repairs.html">Repair services</a>
+      </div>
+      <div class="nav-cta">
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </button>
+        <button id="logout-btn" class="btn btn-ghost">Log out</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="section">
+    <div class="wrap">
+      <div class="dash-grid">
+        <aside class="dash-side">
+          <div class="dash-profile">
+            <div class="dash-avatar" id="dash-avatar">–</div>
+            <div>
+              <div class="dash-name" id="dash-name">Loading…</div>
+              <div class="dash-role" id="dash-role"></div>
+            </div>
+          </div>
+          <nav class="dash-nav">
+            <a href="dashboard.html" class="active">Overview</a>
+            <a href="add-device.html">List a device</a>
+            <a href="devices.html">Browse devices</a>
+            <a href="repairs.html">Repair services</a>
+          </nav>
+        </aside>
+
+        <div>
+          <div class="section-head" style="margin-bottom:28px;">
+            <h2>Overview</h2>
+            <p>Your listings and activity on SA Store, at a glance.</p>
+          </div>
+
+          <div class="stat-grid">
+            <div class="stat-card">
+              <div class="stat-value" id="stat-listings">–</div>
+              <div class="stat-label">Active listings</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" id="stat-bids">–</div>
+              <div class="stat-label">Bids received</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" id="stat-sold">–</div>
+              <div class="stat-label">Devices sold</div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3>Your listings</h3>
+            <div id="my-listings"></div>
+            <div id="my-listings-empty" style="display:none; color:var(--ink-soft); font-size:14px; padding:12px 0;">
+              You haven't listed a device yet. <a href="add-device.html" style="color:var(--ink); font-weight:600;">List your first one</a>.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/devices.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
